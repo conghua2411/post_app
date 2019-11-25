@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:post_app/common_widget/post_widget.dart';
 import 'package:post_app/service/language/language_service.dart';
-import 'package:post_app/ui/main_bloc.dart';
+import 'package:post_app/ui/main_page/main_bloc.dart';
 import 'package:post_app/model/post/post_model.dart';
 import 'package:provider/provider.dart';
 

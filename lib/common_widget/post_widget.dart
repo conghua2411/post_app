@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:post_app/common_widget/post_image.dart';
 import 'package:post_app/common_widget/user_image.dart';
 import 'package:post_app/model/post/post_model.dart';
-import 'package:post_app/ui/post_detail/post_detail_page.dart';
+import 'package:post_app/ui/post_detail/post_detail_route.dart';
 
 class PostWidget extends StatefulWidget {
   final PostModel post;
@@ -18,11 +18,7 @@ class PostWidget extends StatefulWidget {
 class PostState extends State<PostWidget> {
   _gotoPostDetail(PostModel post) {
     Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (_) => PostDetailPage(
-          post: widget.post,
-        ),
-      ),
+      getPostDetailRoute(widget.post),
     );
   }
 

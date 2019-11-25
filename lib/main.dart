@@ -3,10 +3,8 @@ import 'package:post_app/repo/user/user_repo.dart';
 import 'package:post_app/service/api/api_service.dart';
 import 'package:post_app/service/language/language_service.dart';
 import 'package:post_app/service/shared_preference/shared_preference_service.dart';
-import 'package:post_app/ui/main_page.dart';
+import 'package:post_app/ui/main_page/main_route.dart';
 import 'package:provider/provider.dart';
-
-import 'package:post_app/ui/main_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'repo/post/post_repo.dart';
 import 'service/database/database_service.dart';
@@ -101,18 +99,7 @@ class MyAppState extends State<MyApp> {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: ProxyProvider<PostRepo, MainBloc>(
-          initialBuilder: (context) {
-            MainBloc mainBloc = MainBloc(
-                postRepo: Provider.of<PostRepo>(context, listen: false));
-            mainBloc.loadPostListData();
-            mainBloc.downloadJson();
-            return mainBloc;
-          },
-          builder: (context, postRepo, mainBloc) => mainBloc,
-          dispose: (context, mainBloc) => mainBloc.dispose(),
-          child: MainPage(),
-        ),
+        home: mainRoute,
       ),
     );
   }
