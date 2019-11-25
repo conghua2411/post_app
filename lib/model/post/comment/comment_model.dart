@@ -1,0 +1,17 @@
+import 'package:flutter/foundation.dart';
+
+class CommentModel {
+  int postId;
+  int id;
+  String name;
+  String email;
+  String body;
+
+  CommentModel({
+    @required this.postId,
+    @required this.id,
+    @required this.name,
+    @required this.email,
+    @required this.body,
+  });
+}
