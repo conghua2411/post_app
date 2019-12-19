@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:post_app/base/base_state.dart';
 import 'package:post_app/common_widget/post_image.dart';
 import 'package:post_app/common_widget/user_image.dart';
 import 'package:post_app/model/post/post_model.dart';
@@ -15,7 +16,7 @@ class PostDetailPage extends StatefulWidget {
   State createState() => PostDetailState();
 }
 
-class PostDetailState extends State<PostDetailPage> {
+class PostDetailState extends BaseState<PostDetailPage> {
   _gotoUserDetail(int userId) {
     Navigator.of(context).push(
       MaterialPageRoute(

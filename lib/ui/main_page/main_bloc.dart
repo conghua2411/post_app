@@ -3,11 +3,12 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:post_app/base/base_bloc.dart';
 import 'package:post_app/model/post/post_model.dart';
 import 'package:post_app/repo/post/post_repo.dart';
 import 'package:rxdart/rxdart.dart';
 
-class MainBloc {
+class MainBloc extends BaseBloc {
   PostRepo postRepo;
 
   BehaviorSubject<List<PostModel>> bsListPost =
@@ -29,7 +30,8 @@ class MainBloc {
     });
   }
 
-  dispose() {
+  @override
+  void dispose() {
     print('MainBloc: dispose');
     bsListPost.close();
   }

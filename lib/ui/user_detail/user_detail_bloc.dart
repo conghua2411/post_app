@@ -1,10 +1,11 @@
 import 'package:flutter/foundation.dart';
+import 'package:post_app/base/base_bloc.dart';
 import 'package:post_app/repo/user/user_repo.dart';
 import 'package:rxdart/rxdart.dart';
 
 enum UserDetailViewState {loading, loaded, error}
 
-class UserDetailBloc {
+class UserDetailBloc extends BaseBloc {
   UserRepo userRepo;
 
   BehaviorSubject<String> bsImageBackground = BehaviorSubject();
@@ -21,7 +22,9 @@ class UserDetailBloc {
     @required this.userRepo,
   });
 
-  dispose() {
+
+  @override
+  void dispose() {
     bsImageBackground.close();
     bsImageUser.close();
     bsUsername.close();

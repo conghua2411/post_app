@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:post_app/base/base_state.dart';
 import 'package:post_app/common_widget/post_widget.dart';
 import 'package:post_app/service/language/language_service.dart';
 import 'package:post_app/ui/main_page/main_bloc.dart';
@@ -12,33 +13,13 @@ class MainPage extends StatefulWidget {
   State createState() => MainPageState();
 }
 
-class MainPageState extends State<MainPage> {
-
-  /// language change
-  StreamSubscription<String> _subscriptionLangChange;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    _subscriptionLangChange = Provider.of<LanguageService>(context).bsLangOut.listen((lang) {
-      print('MainPage: lang change : $lang');
-      setState(() {});
-    });
-
-  }
-
-  @override
-  void dispose() {
-    _subscriptionLangChange.cancel();
-    super.dispose();
-  }
-
+class MainPageState extends BaseState<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(Provider.of<LanguageService>(context).getStringKey('AppName')),
+        title:
+            Text(Provider.of<LanguageService>(context).getStringKey('AppName')),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.add),

@@ -12,6 +12,8 @@ import 'service/database/database_service.dart';
 const String endpoint = 'https://jsonplaceholder.typicode.com';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   DatabaseService databaseService = DatabaseService();
 
   ApiService apiService = ApiService(endpoint: endpoint);
@@ -73,19 +75,19 @@ class MyAppState extends State<MyApp> {
           value: widget.prefService,
         ),
         ProxyProvider<SharedPreferenceService, LanguageService>(
-          builder: (context, sharedPreferenceService, languageService) =>
+          update: (context, sharedPreferenceService, languageService) =>
               LanguageService(prefService: sharedPreferenceService),
           dispose: (context, languageService) => languageService.dispose(),
         ),
         ProxyProvider2<ApiService, DatabaseService, PostRepo>(
-          builder: (context, apiService, databaseService, postRepo) => PostRepo(
+          update: (context, apiService, databaseService, postRepo) => PostRepo(
             apiService: apiService,
             databaseService: databaseService,
           ),
         ),
         ProxyProvider3<ApiService, DatabaseService, SharedPreferenceService,
             UserRepo>(
-          builder: (context, apiService, databaseService,
+          update: (context, apiService, databaseService,
                   sharedPreferenceService, userRepo) =>
               UserRepo(
             apiService: apiService,

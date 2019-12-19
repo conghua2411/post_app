@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 getUserDetailRoute(int userId) {
   return ProxyProvider<UserRepo, UserDetailBloc>(
-    initialBuilder: (context) {
+    create: (context) {
       UserDetailBloc userDetailBloc = UserDetailBloc(
         userRepo: Provider.of<UserRepo>(
           context,
@@ -15,7 +15,7 @@ getUserDetailRoute(int userId) {
       userDetailBloc.getUserById(userId);
       return userDetailBloc;
     },
-    builder: (context, userRepo, userDetailBloc) => userDetailBloc,
+    update: (context, userRepo, userDetailBloc) => userDetailBloc,
     dispose: (context, userDetailBloc) => userDetailBloc.dispose(),
     child: UserDetailPage(),
   );

@@ -1,6 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:post_app/base/base_state.dart';
 import 'package:post_app/service/language/language_service.dart';
 import 'package:post_app/ui/user_detail/user_detail_bloc.dart';
 import 'package:provider/provider.dart';
@@ -10,26 +9,7 @@ class UserDetailPage extends StatefulWidget {
   State createState() => UserDetailState();
 }
 
-class UserDetailState extends State<UserDetailPage> {
-  StreamSubscription<String> subscriptionLang;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    subscriptionLang =
-        Provider.of<LanguageService>(context).bsLangOut.listen((lang) {
-      print('UserDetailPage: lang change : $lang');
-      setState(() {});
-    });
-  }
-
-  @override
-  void dispose() {
-    subscriptionLang.cancel();
-    super.dispose();
-  }
-
+class UserDetailState extends BaseState<UserDetailPage> {
   _changeLanguageKr() {
     print('change language kr');
     Provider.of<UserDetailBloc>(context).changeLanguage('kr').then(
