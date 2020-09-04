@@ -6,17 +6,16 @@ import 'package:post_app/service/shared_preference/shared_preference_service.dar
 import 'package:post_app/ui/main_page/main_route.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'env.dart';
 import 'repo/post/post_repo.dart';
 import 'service/database/database_service.dart';
-
-const String endpoint = 'https://jsonplaceholder.typicode.com';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   DatabaseService databaseService = DatabaseService();
 
-  ApiService apiService = ApiService(endpoint: endpoint);
+  ApiService apiService = ApiService(endpoint: Env.ENDPOINT);
 
   await databaseService.setupBd();
 

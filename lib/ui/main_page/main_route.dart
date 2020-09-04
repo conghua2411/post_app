@@ -7,7 +7,11 @@ import 'main_page.dart';
 var mainRoute = ProxyProvider<PostRepo, MainBloc>(
   create: (context) {
     MainBloc mainBloc = MainBloc(
-        postRepo: Provider.of<PostRepo>(context, listen: false));
+      postRepo: Provider.of<PostRepo>(
+        context,
+        listen: false,
+      ),
+    );
     mainBloc.loadPostListData();
     mainBloc.downloadJson();
     return mainBloc;

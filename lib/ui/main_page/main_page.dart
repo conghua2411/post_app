@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:post_app/base/base_state.dart';
 import 'package:post_app/common_widget/post_widget.dart';
@@ -24,7 +22,10 @@ class MainPageState extends BaseState<MainPage> {
           IconButton(
             icon: Icon(Icons.add),
             onPressed: () {
-              Provider.of<MainBloc>(context).readFile();
+              Provider.of<MainBloc>(
+                context,
+                listen: false,
+              ).readFile();
             },
           ),
         ],
