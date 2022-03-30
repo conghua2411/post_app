@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:post_app/data/repositories/user_preference_repository.dart';
 import 'package:post_app/repo/user/user_repo.dart';
 import 'package:post_app/service/api/api_service.dart';
 import 'package:post_app/service/language/language_service.dart';
@@ -73,9 +74,12 @@ class MyAppState extends State<MyApp> {
         Provider<SharedPreferenceService>.value(
           value: widget.prefService,
         ),
-        ProxyProvider<SharedPreferenceService, LanguageService>(
-          update: (context, sharedPreferenceService, languageService) =>
-              LanguageService(prefService: sharedPreferenceService),
+        ProxyProvider<SharedPreferenceService, UserReferenceRepository>(
+          update: (_, service, repo) => UserReferenceRepository(service),
+        ),
+        ProxyProvider<UserReferenceRepository, LanguageService>(
+          update: (context, repo, languageService) =>
+              LanguageService(userPreferenceRepo: repo),
           dispose: (context, languageService) => languageService.dispose(),
         ),
         ProxyProvider2<ApiService, DatabaseService, PostRepo>(
@@ -84,14 +88,10 @@ class MyAppState extends State<MyApp> {
             databaseService: databaseService,
           ),
         ),
-        ProxyProvider3<ApiService, DatabaseService, SharedPreferenceService,
-            UserRepo>(
-          update: (context, apiService, databaseService,
-                  sharedPreferenceService, userRepo) =>
-              UserRepo(
+        ProxyProvider2<ApiService, DatabaseService, UserRepo>(
+          update: (context, apiService, databaseService, userRepo) => UserRepo(
             apiService: apiService,
             databaseService: databaseService,
-            prefService: sharedPreferenceService,
           ),
         ),
       ],

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:post_app/data/repositories/user_preference_repository.dart';
 import 'package:post_app/service/shared_preference/shared_preference_service.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -17,13 +18,12 @@ class LanguageService {
 
   StreamSubscription<String> subscriptionLang;
 
-  final SharedPreferenceService prefService;
+  final UserReferenceRepository userPreferenceRepo;
 
   LanguageService({
-    @required this.prefService,
+    @required this.userPreferenceRepo,
   }) {
-
-    currentLang = prefService.getCurrentLanguage() ?? 'en';
+    currentLang = userPreferenceRepo.getCurrentLanguage() ?? 'en';
     print('LanguageService: constructor - current language: $currentLang');
 
     _bsLangIn = BehaviorSubject();

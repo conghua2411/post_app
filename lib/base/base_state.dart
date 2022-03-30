@@ -7,11 +7,16 @@ import 'package:provider/provider.dart';
 abstract class BaseState<T extends StatefulWidget> extends State<T> {
   StreamSubscription _subMultiLanguage;
 
+  A getComponent<A>() => Provider.of<A>(
+        context,
+        listen: false,
+      );
+
   @override
   void initState() {
     super.initState();
 
-    _subMultiLanguage = Provider.of<LanguageService>(context, listen: false)
+    _subMultiLanguage = getComponent<LanguageService>()
         .bsLangOut
         .listen((lang) {
       setState(() {});

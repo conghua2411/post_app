@@ -2,17 +2,14 @@ import 'package:flutter/foundation.dart';
 import 'package:post_app/model/user/user_model.dart';
 import 'package:post_app/service/api/api_service.dart';
 import 'package:post_app/service/database/database_service.dart';
-import 'package:post_app/service/shared_preference/shared_preference_service.dart';
 
 class UserRepo {
   ApiService apiService;
   DatabaseService databaseService;
-  SharedPreferenceService prefService;
 
   UserRepo({
     @required this.apiService,
     @required this.databaseService,
-    @required this.prefService,
   });
 
   Future<UserModel> getUserById(int id) {
@@ -52,7 +49,4 @@ class UserRepo {
       return false;
     });
   }
-
-  // change language pref
-  Future<bool> changeLanguage(String lang) => prefService.setCurrentLanguage(lang);
 }

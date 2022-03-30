@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:post_app/base/base_state.dart';
+import 'package:post_app/base/base_bloc_state.dart';
 import 'package:post_app/service/language/language_service.dart';
 import 'package:post_app/ui/user_detail/user_detail_bloc.dart';
 import 'package:provider/provider.dart';
@@ -9,31 +9,27 @@ class UserDetailPage extends StatefulWidget {
   State createState() => UserDetailState();
 }
 
-class UserDetailState extends BaseState<UserDetailPage> {
+class UserDetailState extends BaseBlocState<UserDetailPage, UserDetailBloc> {
   _changeLanguageKr() {
-    print('change language kr');
-    Provider.of<UserDetailBloc>(context).changeLanguage('kr').then(
-            (success) {
-          if (success) {
-            Provider.of<LanguageService>(context).changeLanguage('kr');
-          } else {
-            print('UserDetailPage: change language $success');
-          }
-        }, onError: (e) {
+    getBloc().changeLanguage('kr').then((success) {
+      if (success) {
+        getComponent<LanguageService>().changeLanguage('kr');
+      } else {
+        print('UserDetailPage: change language $success');
+      }
+    }, onError: (e) {
       print('UserDetailPage: change language: error: $e');
     });
   }
 
   _changeLanguageEn() {
-    print('change language en');
-    Provider.of<UserDetailBloc>(context).changeLanguage('en').then(
-            (success) {
-          if (success) {
-            Provider.of<LanguageService>(context).changeLanguage('en');
-          } else {
-            print('UserDetailPage: change language $success');
-          }
-        }, onError: (e) {
+    getBloc().changeLanguage('en').then((success) {
+      if (success) {
+        getComponent<LanguageService>().changeLanguage('en');
+      } else {
+        print('UserDetailPage: change language $success');
+      }
+    }, onError: (e) {
       print('UserDetailPage: change language: error: $e');
     });
   }

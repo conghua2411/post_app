@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:post_app/base/base_bloc.dart';
+import 'package:post_app/data/repositories/user_preference_repository.dart';
 import 'package:post_app/repo/user/user_repo.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -7,6 +8,7 @@ enum UserDetailViewState {loading, loaded, error}
 
 class UserDetailBloc extends BaseBloc {
   UserRepo userRepo;
+  UserReferenceRepository userReferenceRepository;
 
   BehaviorSubject<String> bsImageBackground = BehaviorSubject();
   BehaviorSubject<String> bsImageUser = BehaviorSubject();
@@ -20,6 +22,7 @@ class UserDetailBloc extends BaseBloc {
 
   UserDetailBloc({
     @required this.userRepo,
+    @required this.userReferenceRepository,
   });
 
 
@@ -55,5 +58,5 @@ class UserDetailBloc extends BaseBloc {
     });
   }
 
-  Future<bool> changeLanguage(String lang) => userRepo.changeLanguage(lang);
+  Future<bool> changeLanguage(String lang) => userReferenceRepository.setCurrentLanguage(lang);
 }
